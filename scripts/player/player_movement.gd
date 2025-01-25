@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 
 	# Lerp curretn speed back to normal.
 	current_speed = lerpf(current_speed, base_speed,   delta / walk_speed_recovery)
-	print(current_speed)
+	ui.speed_text_label.text = "Speed: " + str(round(current_speed * 100)/100)
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
