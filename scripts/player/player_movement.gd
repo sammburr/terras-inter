@@ -41,9 +41,17 @@ func _input(event: InputEvent) -> void:
 		
 		if !result.is_empty():
 			body.look_at(Vector3(result.position.x, body.global_position.y, result.position.z))
+			
 	elif Input.is_action_just_pressed("dash"):
 		ui.sprint_charges.try_use_charge()
 		current_speed = dash_speed
+	
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			camera.global_position += camera.global_basis.z
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			camera.global_position -= camera.global_basis.z
+			
 
 
 func _physics_process(delta: float) -> void:
