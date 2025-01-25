@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctclikyxf2ei6"]
+
+[ext_resource type="Material" uid="uid://dspbrm4dmi6jb" path="res://art/materials/stripes_orange.tres" id="1_3smw6"]
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_r8vjq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bwtli"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yxuv0"]
+
+[node name="Player" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+script = ExtResource("1_r8vjq")
+camera = NodePath("Camera/Camera3D")
+body = NodePath("CollisionShape3D")
+mouse_collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_bwtli")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
+material_override = ExtResource("1_3smw6")
+mesh = SubResource("CapsuleMesh_yxuv0")
+skeleton = NodePath("../..")
+
+[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.893073, -0.449911, 0, 0.449911, 0.893073, 0, 4, 1.62953)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

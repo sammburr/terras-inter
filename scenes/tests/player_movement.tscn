@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4oay17owvghy"]
+
+[ext_resource type="PackedScene" uid="uid://dmae41jaquqt2" path="res://scenes/enviroments/test_enviroment.tscn" id="1_smmtx"]
+[ext_resource type="PackedScene" uid="uid://ctclikyxf2ei6" path="res://scenes/prefabs/player/player.tscn" id="2_kcss1"]
+
+[node name="PlayerMovement" type="Node3D"]
+
+[node name="TestEnviroment" parent="." instance=ExtResource("1_smmtx")]
+
+[node name="Player" parent="." instance=ExtResource("2_kcss1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

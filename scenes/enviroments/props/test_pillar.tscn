@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkfwufp23ltn4"]
+
+[ext_resource type="Material" uid="uid://ifcrtjtuhsg3" path="res://art/materials/checker_black_white.tres" id="1_l8lt6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_li3wl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8gw2l"]
+
+[node name="TestPillar" type="Node3D"]
+
+[node name="Pillar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar"]
+shape = SubResource("CylinderShape3D_li3wl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar"]
+material_override = ExtResource("1_l8lt6")
+mesh = SubResource("CylinderMesh_8gw2l")

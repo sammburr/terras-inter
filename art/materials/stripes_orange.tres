@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dspbrm4dmi6jb"]
+
+[ext_resource type="Texture2D" uid="uid://ndfxpo5yh8vx" path="res://assets/images/stripes_orange.png" id="1_3va8p"]
+
+[resource]
+albedo_texture = ExtResource("1_3va8p")
+uv1_triplanar = true
+texture_filter = 0

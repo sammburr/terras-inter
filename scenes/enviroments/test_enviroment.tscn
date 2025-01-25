@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmae41jaquqt2"]
+
+[ext_resource type="Material" uid="uid://ifcrtjtuhsg3" path="res://art/materials/checker_black_white.tres" id="1_bvkcm"]
+[ext_resource type="PackedScene" uid="uid://bkfwufp23ltn4" path="res://scenes/enviroments/props/test_pillar.tscn" id="2_ilpja"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxgb8"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3eotr"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="Environment" id="Environment_k4edh"]
+
+[node name="TestEnviroment" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_nxgb8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = ExtResource("1_bvkcm")
+mesh = SubResource("BoxMesh_3eotr")
+
+[node name="TestPillar" parent="." instance=ExtResource("2_ilpja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692719, 0.0500002, -6.3112)
+
+[node name="TestPillar2" parent="." instance=ExtResource("2_ilpja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.62939, 0.0500002, -0.153317)
+
+[node name="TestPillar3" parent="." instance=ExtResource("2_ilpja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51536, 0.0500007, 5.59425)
+
+[node name="TestPillar4" parent="." instance=ExtResource("2_ilpja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26081, 0.0500002, -0.838507)
+
+[node name="TestPillar5" parent="." instance=ExtResource("2_ilpja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.79759, 0.0500002, -4.44038)
+
+[node name="TestPillar6" parent="." instance=ExtResource("2_ilpja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40072, 0.0500002, 4.19631)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k4edh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.787226, 0.301813, -0.537759, 0, 0.872044, 0.489428, 0.616665, -0.38529, 0.686495, 0, 5.09431, 0)
+shadow_enabled = true
