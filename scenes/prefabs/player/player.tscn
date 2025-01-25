@@ -13,7 +13,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_r8vjq")
-camera = NodePath("Camera/Camera3D")
+camera = NodePath("CameraAttach/Camera3D")
 body = NodePath("CollisionShape3D")
 mouse_collision_mask = 1
 
@@ -25,8 +25,8 @@ material_override = ExtResource("1_3smw6")
 mesh = SubResource("CapsuleMesh_yxuv0")
 skeleton = NodePath("../..")
 
-[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+[node name="CameraAttach" type="Node3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.893073, -0.449911, 0, 0.449911, 0.893073, 0, 4, 1.62953)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera"]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraAttach"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
