@@ -8,4 +8,4 @@
 [node name="TestEnviroment" parent="." instance=ExtResource("1_smmtx")]
 
 [node name="Player" parent="." instance=ExtResource("2_kcss1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.9795, 0, 7.41887)

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7rh1hn5nvy0q"]
+
+[ext_resource type="PackedScene" uid="uid://clsm2o6u22d2v" path="res://assets/models/test_env.fbx" id="1_33q2o"]
+[ext_resource type="Material" uid="uid://dspbrm4dmi6jb" path="res://art/materials/stripes_orange.tres" id="2_2ogmt"]
+[ext_resource type="Material" uid="uid://ifcrtjtuhsg3" path="res://art/materials/checker_black_white.tres" id="3_l2xon"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0024r"]
+size = Vector3(1.01178, 0.972839, 0.0622101)
+
+[node name="test_env" instance=ExtResource("1_33q2o")]
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("2_2ogmt")
+
+[node name="Cube_001" parent="." index="1"]
+material_override = ExtResource("2_2ogmt")
+
+[node name="Cube_002" parent="." index="2"]
+material_override = ExtResource("2_2ogmt")
+
+[node name="Cube_003" parent="." index="3"]
+material_override = ExtResource("3_l2xon")
+
+[node name="Cube_004" parent="." index="4"]
+material_override = ExtResource("3_l2xon")
+
+[node name="Cube_005" parent="." index="5"]
+material_override = ExtResource("3_l2xon")
+
+[node name="Cube_006" parent="." index="6"]
+material_override = ExtResource("3_l2xon")
+
+[node name="Floor" parent="." index="7"]
+material_override = ExtResource("3_l2xon")
+
+[node name="Collider" type="StaticBody3D" parent="Floor" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Collider" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, -0.173737, 0.266693, -5.32747e-05)
+shape = SubResource("BoxShape3D_0024r")
+
+[node name="Floor_001" parent="." index="8"]
+material_override = ExtResource("3_l2xon")
