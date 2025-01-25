@@ -1,11 +1,29 @@
 extends CharacterBody3D
 
+@export_category("REFERENCES")
 @export var camera : Camera3D
 @export var body : Node3D
+@export var ui : PlayerUI
+@export_category("SETTINGS")
 @export_flags_3d_physics var mouse_collision_mask : int
+@export var base_speed : float = 5.0
+@export var dash_speed : float = 15.0
+@export var time_per_stamina : int
+@export var walk_speed_recovery : float = 2.0
 
-const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+
+var stamina_timer : Timer
+var current_speed : float
+
+func _ready() -> void:
+	current_speed = base_speed
+	
+	stamina_timer = Timer.new()
+	stamina_timer.wait_time = time_per_stamina
+	stamina_timer.autostart = true
+	stamina_timer.timeout.connect(_recharge_stamina)
+	add_child(stamina_timer)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -23,6 +41,9 @@ func _input(event: InputEvent) -> void:
 		
 		if !result.is_empty():
 			body.look_at(Vector3(result.position.x, body.global_position.y, result.position.z))
+	elif Input.is_action_just_pressed("dash"):
+		ui.sprint_charges.try_use_charge()
+		current_speed = dash_speed
 
 
 func _physics_process(delta: float) -> void:
@@ -34,15 +55,24 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
+	# Lerp curretn speed back to normal.
+	current_speed = lerpf(current_speed, base_speed,   delta / walk_speed_recovery)
+	print(current_speed)
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	move_and_slide()
+
+func _recharge_stamina() -> void:
+	ui.sprint_charges.try_recharge()
+	pass
+	
