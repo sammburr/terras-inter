@@ -11,6 +11,7 @@ extends CharacterBody3D
 @export var time_per_stamina : int
 @export var walk_speed_recovery : float = 2.0
 
+#TODO: make exported var?
 const JUMP_VELOCITY = 4.5
 
 var stamina_timer : Timer
@@ -19,6 +20,7 @@ var current_speed : float
 func _ready() -> void:
 	current_speed = base_speed
 	
+	# start a timer that periodically recharges stamina
 	stamina_timer = Timer.new()
 	stamina_timer.wait_time = time_per_stamina
 	stamina_timer.autostart = true
@@ -27,6 +29,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		# Point player toward mouse on ground
 		var mouse_pos = event.position
 		var ray_origin = camera.project_ray_origin(mouse_pos)
 
@@ -41,15 +44,17 @@ func _input(event: InputEvent) -> void:
 		
 		if !result.is_empty():
 			body.look_at(Vector3(result.position.x, body.global_position.y, result.position.z))
-			
-	elif Input.is_action_just_pressed("dash"):
-		ui.sprint_charges.try_use_charge()
-		current_speed = dash_speed
 	
+	# Handle dashing
+	elif Input.is_action_just_pressed("dash"):
+		if ui.sprint_charges.try_use_charge():
+			current_speed = dash_speed
+	
+	# Handle camera zoom
 	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera.global_position += camera.global_basis.z
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera.global_position -= camera.global_basis.z
 			
 
