@@ -1,14 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctclikyxf2ei6"]
 
-[ext_resource type="Material" uid="uid://dspbrm4dmi6jb" path="res://art/materials/stripes_orange.tres" id="1_3smw6"]
 [ext_resource type="PackedScene" uid="uid://dqiewxsvvvoh1" path="res://scenes/ui/player_ui.tscn" id="1_c15v6"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_if8ma"]
 [ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_r8vjq"]
+[ext_resource type="PackedScene" uid="uid://c1jlw0ypcprs1" path="res://art/models/test_player_model.tscn" id="3_f3f6l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bwtli"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_yxuv0"]
-
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("player_model")]
+script = ExtResource("1_if8ma")
+player_model = NodePath("CharacterBody3D/CollisionShape3D/test_player_model")
 
 [node name="PlayerUi" parent="." instance=ExtResource("1_c15v6")]
 
@@ -26,13 +27,11 @@ walk_speed_recovery = 0.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_bwtli")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
-material_override = ExtResource("1_3smw6")
-mesh = SubResource("CapsuleMesh_yxuv0")
-skeleton = NodePath("../..")
+[node name="test_player_model" parent="CharacterBody3D/CollisionShape3D" instance=ExtResource("3_f3f6l")]
+transform = Transform3D(0.120482, 0, 0, 0, 0.120482, 0, 0, 0, 0.120482, 0, -0.174625, 0)
 
 [node name="CameraAttach" type="Node3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.893073, -0.449911, 0, 0.449911, 0.893073, 0, 4, 1.62953)
+transform = Transform3D(1, 0, 0, 0, 0.445339, -0.895362, 0, 0.895362, 0.445339, 0, 1.61626, 4.68125)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraAttach"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
